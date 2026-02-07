@@ -14,6 +14,16 @@ L.Icon.Default.mergeOptions({
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
+// Custom red icon for user location
+const redIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
 // Component to re-center map when location changes
 const RecenterMap = ({ location }) => {
     const map = useMap();
@@ -65,7 +75,7 @@ const MapComponent = ({ location, places = [], selectedPlace, onMarkerClick, dir
                 {/* User Location Marker */}
                 {location && (
                     <>
-                        <Marker position={[location.lat, location.lng]}>
+                        <Marker position={[location.lat, location.lng]} icon={redIcon}>
                             <Popup>
                                 <div className="text-center font-semibold">You are here</div>
                             </Popup>
