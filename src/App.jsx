@@ -134,6 +134,17 @@ function App() {
             placeholder="Search budget food, stays or services..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            onClear={() => setSearchQuery('')}
+            actionButton={
+              <Button
+                variant="primary"
+                size="sm"
+                className="rounded-md py-1 h-8"
+                onClick={() => {/* Already filtered reactive, but user wants the button */ }}
+              >
+                Search
+              </Button>
+            }
           />
         </div>
 
@@ -160,7 +171,18 @@ function App() {
               placeholder="Search spots..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onClear={() => setSearchQuery('')}
               className="w-full"
+              actionButton={
+                <Button
+                  variant="primary"
+                  size="sm"
+                  className="rounded-md py-1 h-8"
+                  onClick={() => {/* Reactive filtering */ }}
+                >
+                  Search
+                </Button>
+              }
             />
           </div>
 
