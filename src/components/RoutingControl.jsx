@@ -18,7 +18,8 @@ const RoutingControl = ({ start, end }) => {
             routeWhileDragging: true,
             showAlternatives: true,
             fitSelectedRoutes: true,
-            show: false, // Hide the turn-by-turn instructions container by default
+            show: true, // Show turn-by-turn instructions by default
+            collapsible: true, // Allow user to collapse it
             // Customizing the line style
             lineOptions: {
                 styles: [{ color: '#6FA1EC', weight: 4 }]

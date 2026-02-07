@@ -71,6 +71,59 @@
   /* Base z-index */
 }
 
+/* Leaflet Routing Machine Overrides */
+.leaflet-routing-container {
+  background-color: white !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  border: none !important;
+  padding: 10px !important;
+  max-width: 320px !important;
+  font-size: 13px !important;
+}
+
+.leaflet-routing-alt {
+  max-height: 250px !important;
+  overflow-y: auto !important;
+}
+
+/* Fix for the square button icon */
+.leaflet-routing-collapse-btn {
+  background-color: #0F9D58 !important;
+  color: white !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  top: 0 !important;
+  right: 0 !important;
+  font-size: 20px !important;
+}
+
+.leaflet-routing-collapse-btn:after {
+  content: '▼' !important;
+  font-family: Arial, sans-serif !important;
+}
+
+.leaflet-routing-container-collapse .leaflet-routing-collapse-btn:after {
+  content: '▲' !important;
+}
+
+/* Ensure routing control is above other map elements */
+.leaflet-top.leaflet-right {
+  z-index: 1001 !important;
+  margin-top: 60px !important; /* Avoid overlap with mobile category filter */
+}
+
+@media (max-width: 768px) {
+  .leaflet-routing-container {
+    max-width: 280px !important;
+    font-size: 12px !important;
+  }
+}
+
 /* Utility to hide scrollbar */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
