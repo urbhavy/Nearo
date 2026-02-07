@@ -112,6 +112,19 @@ function App() {
     }
   };
 
+  const handleSearch = () => {
+    if (!searchQuery.trim()) return;
+
+    const matchedCategory = CATEGORIES.find(
+      cat => cat.toLowerCase() === searchQuery.trim().toLowerCase()
+    );
+
+    if (matchedCategory) {
+      setActiveCategory(matchedCategory);
+      setSearchQuery('');
+    }
+  };
+
   return (
     <div className="h-screen flex flex-col bg-gray-50 overflow-hidden">
       <LocationPermissionModal />
@@ -134,13 +147,14 @@ function App() {
             placeholder="Search budget food, stays or services..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
             onClear={() => setSearchQuery('')}
             actionButton={
               <Button
                 variant="primary"
                 size="sm"
                 className="rounded-md py-1 h-8"
-                onClick={() => {/* Already filtered reactive, but user wants the button */ }}
+                onClick={handleSearch}
               >
                 Search
               </Button>
@@ -171,6 +185,7 @@ function App() {
               placeholder="Search spots..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
               onClear={() => setSearchQuery('')}
               className="w-full"
               actionButton={
@@ -178,7 +193,7 @@ function App() {
                   variant="primary"
                   size="sm"
                   className="rounded-md py-1 h-8"
-                  onClick={() => {/* Reactive filtering */ }}
+                  onClick={handleSearch}
                 >
                   Search
                 </Button>
