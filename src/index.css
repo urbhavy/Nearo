@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Brand Colors */
+  --primary: #0F9D58;
+  /* Teal Green */
+  --primary-hover: #0B8E4D;
+  --secondary: #E8F5E9;
+  /* Light Green Background */
+  --accent: #34A853;
+
+  /* UI Colors */
+  --background: #F3F4F6;
+  /* Light Grey Background */
+  --surface: #FFFFFF;
+  --text-main: #1F2937;
+  --text-secondary: #6B7280;
+  --border: #E5E7EB;
+
+  /* Typography */
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Leaflet Overrides for Custom Look */
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 0;
+  overflow: hidden;
+}
+
+.leaflet-popup-content {
+  margin: 0;
+  width: 240px !important;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  z-index: 0;
+  /* Base z-index */
+}
