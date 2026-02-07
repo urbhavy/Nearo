@@ -41,6 +41,7 @@ function App() {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [directions, setDirections] = useState(null);
   const [loadingPlaces, setLoadingPlaces] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Filter State
   const [showFilters, setShowFilters] = useState(false);
@@ -70,7 +71,13 @@ function App() {
       const prices = p.priceRange.replace(/₹/g, '').split(' - ').map(Number);
       const avgPrice = (prices[0] + prices[1]) / 2;
       const categoryMatch = activeCategory === 'All' || p.category === activeCategory;
-      return categoryMatch && avgPrice <= maxPrice;
+
+      const searchLower = searchQuery.toLowerCase();
+      const searchMatch = !searchQuery ||
+        p.name.toLowerCase().includes(searchLower) ||
+        p.category.toLowerCase().includes(searchLower);
+
+      return categoryMatch && avgPrice <= maxPrice && searchMatch;
     });
 
     if (sortBy === 'nearest') {
@@ -125,6 +132,8 @@ function App() {
           <Input
             icon={Search}
             placeholder="Search budget food, stays or services..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
 
@@ -141,21 +150,34 @@ function App() {
         </div>
       </header>
 
-      {/* CATEGORY TABS */}
-      <div className={`bg-white border-b border-gray-100 py-3 px-4 overflow-x-auto whitespace-nowrap shrink-0 ${showMapMobile ? 'hidden md:block' : 'block'}`}>
-        <div className="flex gap-2 container mx-auto">
-          {CATEGORIES.map(cat => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${activeCategory === cat
-                ? 'bg-[#0F9D58] text-white shadow-sm'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
-            >
-              {cat}
-            </button>
-          ))}
+      {/* CATEGORY TABS & MOBILE SEARCH */}
+      <div className={`bg-white border-b border-gray-100 py-3 px-4 shrink-0 ${showMapMobile ? 'hidden md:block' : 'block'}`}>
+        <div className="container mx-auto space-y-3">
+          {/* Mobile Search Input */}
+          <div className="md:hidden">
+            <Input
+              icon={Search}
+              placeholder="Search spots..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full"
+            />
+          </div>
+
+          <div className="flex gap-2 overflow-x-auto whitespace-nowrap no-scrollbar pb-1">
+            {CATEGORIES.map(cat => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${activeCategory === cat
+                  ? 'bg-[#0F9D58] text-white shadow-sm'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -306,8 +328,8 @@ function App() {
                     key={cat}
                     onClick={() => setActiveCategory(cat)}
                     className={`px-4 py-2 rounded-full text-xs font-bold shadow-md transition-all whitespace-nowrap ${activeCategory === cat
-                        ? 'bg-[#0F9D58] text-white scale-105'
-                        : 'bg-white/90 backdrop-blur-sm text-gray-700 hover:bg-white'
+                      ? 'bg-[#0F9D58] text-white scale-105'
+                      : 'bg-white/90 backdrop-blur-sm text-gray-700 hover:bg-white'
                       }`}
                   >
                     {cat}
