@@ -142,7 +142,7 @@ function App() {
       </header>
 
       {/* CATEGORY TABS */}
-      <div className="bg-white border-b border-gray-100 py-3 px-4 overflow-x-auto whitespace-nowrap shrink-0">
+      <div className={`bg-white border-b border-gray-100 py-3 px-4 overflow-x-auto whitespace-nowrap shrink-0 ${showMapMobile ? 'hidden md:block' : 'block'}`}>
         <div className="flex gap-2 container mx-auto">
           {CATEGORIES.map(cat => (
             <button
@@ -297,6 +297,24 @@ function App() {
               }}
               onGetDirections={handleGetDirections}
             />
+
+            {/* Mobile Category Overlay */}
+            <div className={`absolute top-4 left-0 right-0 z-[1000] md:hidden px-4 transition-opacity duration-300 ${showMapMobile ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+              <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+                {CATEGORIES.map(cat => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`px-4 py-2 rounded-full text-xs font-bold shadow-md transition-all whitespace-nowrap ${activeCategory === cat
+                        ? 'bg-[#0F9D58] text-white scale-105'
+                        : 'bg-white/90 backdrop-blur-sm text-gray-700 hover:bg-white'
+                      }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
 
             {/* Mobile Floating Button */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 md:hidden z-[1000]">
